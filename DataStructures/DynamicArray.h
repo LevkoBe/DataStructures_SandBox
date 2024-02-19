@@ -2,31 +2,35 @@
 #include <vector>
 #include <iostream>
 
+template <typename T>
 class DynamicArray
 {
-	int* dynamicArray = nullptr;
+	T* dynamicArray = nullptr;
 	int size = 0;
 	int capacity = 1;
 public:
-	DynamicArray(int capacity = 1): capacity(capacity), dynamicArray(new int[capacity]) {};
-	// todo: use template
-	// todo: check if capacity is being initialized properly
-	DynamicArray(std::vector<int> array) : size(array.size()), capacity(size) {
-		dynamicArray = new int[size];
+	DynamicArray(int capacity = 1): capacity(capacity), dynamicArray(new T[capacity]) {
+		for (int i = 0; i < capacity; i++) {
+			dynamicArray[i] = T();
+		}
+	}
+
+	DynamicArray(std::vector<T> array) : size(array.size()), capacity(size) {
+		dynamicArray = new T[size];
 		for (int i = 0; i < size; i++) {
 			dynamicArray[i] = array[i];
 		}
 	}
 
-	DynamicArray(std::initializer_list<int> array): size(sizeof(array) / sizeof(int)), capacity(array.size()) {
+	DynamicArray(std::initializer_list<T> array): size(array.size()), capacity(size) {
 		int i = 0;
-		dynamicArray = new int[size];
+		dynamicArray = new T[size];
 		for (auto& value : array) {
 			dynamicArray[i++] = value;
 		}
 	}
 
-	DynamicArray(int* array, int size): size(size), dynamicArray(array), capacity(size) {};
+	DynamicArray(T* array, int size): size(size), dynamicArray(array), capacity(size) {}
 
 	DynamicArray(DynamicArray&& array) noexcept: size(array.getSize()), capacity(array.getCapacity()), dynamicArray(array.dynamicArray) {
 		array.size = 0;
@@ -35,12 +39,14 @@ public:
 	}
 
 	DynamicArray(const DynamicArray& array): size(array.getSize()), capacity(array.getCapacity()) {
-		dynamicArray = new int[size];
+		dynamicArray = new T[size];
 		for (int i = 0; i < size; i++) {
 			dynamicArray[i] = array.dynamicArray[i];
 		}
 	}
 
+
+	// parameters
 	const int getSize() const {
 		return size;
 	}
@@ -49,12 +55,25 @@ public:
 		return capacity;
 	}
 
+
+	// output
 	void print() const {
 		for (int i = 0; i < size; i++) {
-			//std::cout << dynamicArray + i << " ";
 			std::cout << dynamicArray[i] << " ";
 		}
 		std::cout << std::endl;
+	}
+
+	//friend std::ostream& operator<<(std::ostream& os, const DynamicArray<T>& array) {
+	//	for (int i = 0; i < array.getSize(); i++) {
+	//		os << array[i] << " ";
+	//	}
+	//	return os;
+	//}
+
+
+	~DynamicArray() {
+		delete[] dynamicArray;
 	}
 };
 
