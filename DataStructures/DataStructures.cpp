@@ -1,4 +1,3 @@
-// C Program to illustrate 2d array
 #include "DynamicArray.h"
 
 void dynamicIntegerArrays() {
@@ -8,14 +7,14 @@ void dynamicIntegerArrays() {
 	DynamicArray<int> bb(b, 4);
 	DynamicArray<int> cc(c);
 	DynamicArray<int> dd(4);
-	aa.print();
-	bb.print();
-	cc.print();
-	dd.print();
+	std::cout << aa;
+	std::cout << bb;
+	std::cout << cc;
+	std::cout << dd;
 	DynamicArray<int> ee(aa);
-	ee.print();
+	std::cout << ee;
 	DynamicArray<int> ff(std::move(bb));
-	ff.print();
+	std::cout << ff;
 }
 
 void dynamicCharacterArrays() {
@@ -26,26 +25,26 @@ void dynamicCharacterArrays() {
 	DynamicArray<char> bb(b, 4);
 	DynamicArray<char> cc(c);
 	DynamicArray<char> dd(4);
-	aa.print();
-	bb.print();
-	cc.print();
-	dd.print();
+	std::cout << aa;
+	std::cout << bb;
+	std::cout << cc;
+	std::cout << dd;
 	DynamicArray<char> ee(aa);
-	ee.print();
+	std::cout << ee;
 	DynamicArray<char> ff(std::move(bb));
-	ff.print();
+	std::cout << ff;
 }
 
 void dynamicPowered() {
-	//DynamicArray<DynamicArray<std::string>> aa({ {"Hi!", "My name", "is Levko"}, {"And", "what is", "yours?"} });
-	//aa.print();
+	DynamicArray<DynamicArray<std::string>> aa({ {"Hi!", "My name", "is Levko"}, {"And", "what is", "yours?"} });
+	std::cout << aa;
 }
 
 int main()
 {
 	dynamicIntegerArrays();
 	dynamicCharacterArrays();
-
+	dynamicPowered();
 
 	return 0;
 }
